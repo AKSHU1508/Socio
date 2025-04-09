@@ -15,28 +15,35 @@
       </div>
     </a>
       <div class="inner-nav-a">
-        <form action="/profile/edit" method="get">
-          <button>
-            <img
-              src="<%= currUser.profilePhoto.url %>"
-              alt="Profile Picture"
-              class="profile-pic"
-            />
-          </button>
-        </form>
+        <!-- Profile Button -->
+<form action="/profile/edit" method="get">
+  <button class="custom-button" type="submit">
+    <img src="<%= currUser.profilePhoto.url %>" alt="Profile Picture" class="profile-pic" />
+    Profile
+  </button>
+</form>
     
         <!-- 🔍 Search Form -->
         <form action="/posts/search" method="GET" class="search-form">
           <input type="text" name="q" placeholder="Search..." required />
           <button type="submit">🔍</button>
         </form>
+
+        <!-- Create New Post Button -->
+<form action="/posts/new" method="get">
+  <button class="custom-button" type="submit">
+    ➕ Create New Post
+  </button>
+</form>
+
+<!-- Logout Button -->
+<form action="/logout" method="post">
+  <button class="custom-button" type="submit">
+    🚪 Logout
+  </button>
+</form>
+
     
-        <form action="/posts/new">
-          <button>Create New Post</button>
-        </form>
-        <form action="/logout">
-          <button>Logout</button>
-        </form>
       </div>
     </div>
     

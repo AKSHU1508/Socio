@@ -79,7 +79,6 @@ app.get("/login", (req, res) => {
 
 app.get("/posts", isLoggedIn, async (req, res) => {
   let allPosts = await Post.find({}).populate("owner");
-  console.log(allPosts);
   res.render("index.ejs", { allPosts });
 });
 
@@ -219,7 +218,6 @@ app.get("/posts/:id/comment/delete/:commentid", async (req, res) => {
   try {
     let { id, commentid } = req.params;
     let comment = await Comment.findById(commentid);
-    console.log(comment);
     if (req.user._id.toString() === comment.author.toString() && req.user) {
       await Post.findByIdAndUpdate(id, { $pull: { comments: commentid } });
       await Comment.findByIdAndDelete(commentid);
@@ -236,7 +234,6 @@ app.post("/posts/:id/comment", async (req, res) => {
   let post = await Post.findById(req.params.id);
   let newComment = new Comment(req.body.comment);
   newComment.author = req.user._id;
-  console.log(newComment);
   post.comments.push(newComment);
   await post.save();
   await newComment.save();
@@ -249,7 +246,6 @@ app.get("/posts/:id", isLoggedIn, async (req, res) => {
   let post = await Post.findById(id)
     .populate({ path: "comments", populate: { path: "author" } })
     .populate("owner");
-  console.log(post);
   res.render("showPost.ejs", { post });
 });
 
